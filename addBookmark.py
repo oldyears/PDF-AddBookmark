@@ -78,11 +78,11 @@ def process_bookmarks(bookmarks):
     return result
 
 if __name__ == '__main__':
-    # data = {}
-    # with open('C++ Primer Plus  第6版  中文版.json', 'r', encoding='utf-8') as file:
-    #     data = json.load(file)
-    # data['目录'] = process_bookmarks(data['目录'])
-    # with open('C++ Primer Plus  第6版  中文版.json', 'w', encoding='utf-8') as file:
-    #     json.dump(data, file, ensure_ascii=False, indent=4)
+    data = {}
+    with open('C Primer Plus  第6版  中文版.json', 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    data['目录'] = process_bookmarks(data['目录'])
+    with open('C Primer Plus  第6版  中文版.json', 'w', encoding='utf-8') as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)
     
     print('书签文件处理完成')

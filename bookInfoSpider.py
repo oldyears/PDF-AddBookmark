@@ -52,6 +52,7 @@ class bookInfoSpider(scrapy.spiders.Spider):
         with open(bookName + '.json', 'w', encoding='utf-8') as f:
             f.write(json_data)
         print("文件写入完成")
+
         
 
         
