@@ -52,37 +52,24 @@ def crawl():
 def parse_init():
     parser = argparse.ArgumentParser(description="PDF bookmark crawling and adding")
 
-    parser.add_argument('-b', "--bookName", help="the bookName you want to crawl", metavar='')
     parser.add_argument("-i", "--ISBN", help="the ISBN of the book you want to crawl", metavar='')
     parser.add_argument("-o", "--output", help="the output bookInfo file path, default = bookName.json", metavar='')
-    # parser.add_argument("--offset", metavar='', type=int, default=0,
-    #                     help="the offset of the bookmark corresponds to page number, default = 0")
+    parser.add_argument("--offset", metavar='', type=int, default=0,
+                        help="the offset of the bookmark corresponds to page number, default = 0")
     return parser
 
-# 验证参数正确性
-def parse_check(args):
-    # 书名和ISBN不能同时输入
-    if args.bookName and args.ISBN:
-        raise Exception("Error: you can only choose one of -b/--bookName and -i/--ISBN")
 
-    # # 书签偏移量应为int类型，否则报错(初始化时规定后则默认检测类型)
-    # if type(args.offset) != int:
-    #     raise TypeError("Error: the offset must be an integer")
-
+# 此脚本主要处理以下情况：
+# 1. PDF本身自带书签文件，但是其存在格式错位，此时需要用户输入PDF文件地址
+# 2. PDF本身自带书签文件，但是其存在对应错误，此时需要用户输入错位偏移量-offset
+# 3. PDF本身不带书签文件，此时需要用户输入PDF的ISBN号（输入书名会返回多个版本结果，而ISBN对于书籍的特定版本是唯一的）
 
 if __name__ == "__main__":
     # 参数解析
     parser = parse_init()
     args = parser.parse_args()
-
-    # 参数验证
-    try:
-        parse_check(args)
-    except Exception as e:
-        print(e)
-        exit(1)
     
-    bookName = args.ISBN if args.ISBN else args.bookName
+    bookName = args.ISBN 
     # offset = args.offset if args.offset else 0
     output = args.output if args.output else ''
 
